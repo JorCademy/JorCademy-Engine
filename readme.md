@@ -16,7 +16,7 @@ This section is used to quickly browse through the documentation.
 ## Files
 The following files are crucial to understand the inner workings of the template.
 
-<br>
+
 
 ### <i>engine.py</i>
 This file is used to setup the PyGame renderer and to render all the drawable objects onto the screen. This file should not contain any gameplay code.  
@@ -35,13 +35,11 @@ The JorCademy module provides the following building blocks at the moment (we su
 - ```text(content: str, c: color, x: float, y: float) -> None```
 - ```image(url: str, x: float, y: float, scale: float) -> None```
 
-<br>
 
 
 ### <i>primitives.py</i>
 This file contains classes for objects which can be drawn onto the screen. To be more precise, it contains the ```DrawableObject``` class and its subclasses. The most important method inside these classes is ```draw```, which is used by the engine to easily draw different types of objects onto the screen.
 
-<br>
 
 ### <i>game.py</i>
 This file is meant to contain the gameplay code of the game. It is the file the gameplay developer will work with. The other files are not relevant to the gameplay developer. 
@@ -60,7 +58,6 @@ pip install pygame
 ## Practical information
 This section contains some instructions on how to use this template properly, as well as a number of examples. 
 
-<br>
 
 ### Setup & Draw
 The templates starts of with two functions: ```setup``` and ```draw```. Like with most game engines, the ```setup``` function is only executed once and can be used to initialize starting values of the game. The ```draw``` function is executed 60 times per second (once per frame) and can be used to update the game state (e.g, moving drawable objects).  
@@ -72,7 +69,6 @@ def draw() -> None:
     pass
 ```
 
-<br>
 
 ### Setting up the screen
 Setting up the screen can be done using the ```screen``` function. Besides, the template provides helper functions to change properties of the screen, such as the title and backdrop (the latter can also be changed in the ```draw``` phase).
@@ -83,7 +79,6 @@ def setup() -> None:
     backdrop((255, 255, 255))
 ```
 
-<br>
 
 ### Drawing & moving shapes
 Drawing and moving shapes can be done in the ```draw``` functions. Adding shapes is fairly easy due to helper functions from the JorCademy module. The code snippet below shows a program which draws a circle and slowly moves the circle to the bottom right of the screen. 
