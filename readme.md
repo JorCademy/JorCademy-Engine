@@ -1,4 +1,5 @@
 # JorCademy Engine
+
 This template is built for courses on programming, created for JorCademy. It will therefore mainly be used for educational purposes.  
 
 ---
@@ -52,7 +53,7 @@ This file is meant to contain the gameplay code of the game. It is the file the 
 The template is supported by PyGame, a library used to create games with. In this template, it is used to set-up a screen to draw shapes on. In order to use this template, the installation of PyGame is required. This can be done through ```pip```, Python's package manager, using the terminal. The following terminal command can be used to install PyGame: 
 ```
 pip install pygame
-```  
+```
 
 ---
 
@@ -88,9 +89,9 @@ def setup() -> None:
 Drawing and moving shapes can be done in the ```draw``` functions. Adding shapes is fairly easy due to helper functions from the JorCademy module. The code snippet below shows a program which draws a circle and slowly moves the circle to the bottom right of the screen. 
 ```
 # Backdrop properties
-backdrop_color: color = (0, 0, 0)
+    backdrop_color: color = (0, 0, 0)
 
-# Circle properties
+#Circle properties
 x: float = 400
 y: float = 300
 w: int = 100
@@ -110,12 +111,14 @@ def draw() -> None:
     backdrop(backdrop_color)
 
     # Drawing the circle 
-   ellipse(circle_color, x, y, w, h) 
+    ellipse(circle_color, x, y, w, h)
 ```
 ---
+
 ## Maintenance
 As this template is used for educational purposes, we are planning to keep it up-to-date for the upcoming Python versions. However, it deserves to mention that JorCademy is, as it stands, a non-profit organization. Therefore, updates might take some time to be released. 
 
 ---
+
 ## Contact
-If you have any questions or remarks, feel free to reach out: nickjordan200@gmail.com.
+If you have any questions or remarks, feel free to reach out: nickjordan200@gmail.com
