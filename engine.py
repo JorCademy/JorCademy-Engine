@@ -12,8 +12,14 @@ clock = pygame.time.Clock()
 running = True
 
 # Set app icon
-pygame_icon = pygame.image.load('assets/jorcademy.png')
+pygame_icon = pygame.image.load('assets/jc_icon.png')
 pygame.display.set_icon(pygame_icon)
+
+
+def render_objects_on_screen():
+    for obj in jc.draw_buffer:
+        obj.draw(screen)
+
 
 while running:
     # poll for events
@@ -28,6 +34,7 @@ while running:
 
     # Render game
     game.draw()
+    render_objects_on_screen()
 
     # flip() the display to put your work on screen
     pygame.display.flip()
