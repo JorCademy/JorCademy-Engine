@@ -81,9 +81,6 @@ def setup() -> None:
 ### Drawing & moving shapes
 Drawing and moving shapes can be done in the ```draw``` functions. Adding shapes is fairly easy due to helper functions from the JorCademy module. The code snippet below shows a program which draws a circle and slowly moves the circle to the bottom right of the screen. 
 ```
-# Backdrop properties
-    backdrop_color: color = (0, 0, 0)
-
 #Circle properties
 x: float = 400
 y: float = 300
@@ -96,12 +93,18 @@ def setup() -> None:
 
 
 def draw() -> None:
+    global x
+    global y
+    global w
+    global h
+    global circle_color
+
     # Moving circle to the bottom-right
     x += 5
     y += 5
 
     # Drawing backdrop
-    backdrop(backdrop_color)
+    backdrop((0, 0, 0)))
 
     # Drawing the circle 
     ellipse(circle_color, x, y, w, h)

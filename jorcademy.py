@@ -27,6 +27,7 @@ def title(t: str) -> None:
 # Change screen background color
 def backdrop(c: color) -> None:
     global background_color
+    draw_buffer.clear()
     background_color = c
 
 
