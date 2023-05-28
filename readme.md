@@ -17,11 +17,9 @@ This section is used to quickly browse through the documentation.
 The following files are crucial to understand the inner workings of the template.
 
 
-
 ### <i>engine.py</i>
 This file is used to setup the PyGame renderer and to render all the drawable objects onto the screen. This file should not contain any gameplay code.  
 
-<br>
 
 ### <i>jorcademy.py</i>
 This file contains helper functions the developer can use to build their game in <i>game.py</i>. This file mainly contains functions which can be used to draw shapes and change the properties of the game screen. Besides, this module contains the ```draw_buffer```, which contains all objects that need to be drawn onto the screen by the engine. 
