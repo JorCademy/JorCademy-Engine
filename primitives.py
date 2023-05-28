@@ -1,6 +1,6 @@
 import pygame
 
-
+# Super class - representing objects that can be drawn on the screen
 class DrawableObject:
     def __init__(self, x, y, w, h):
         self.x = x
@@ -16,6 +16,7 @@ class DrawableObject:
         pygame.draw.circle(context, self.x, self.y, 100)
 
 
+# Derived class - representing an ellipse object 
 class Ellipse(DrawableObject):
     def __init__(self, color, x, y, w, h):
         super().__init__(x, y, w, h)
@@ -34,6 +35,7 @@ class Ellipse(DrawableObject):
                             self.width)
 
 
+# Derived class - representing a rectangular object
 class Rectangle(DrawableObject):
     def __init__(self, color, x, y, w, h):
         super().__init__(x, y, w, h)
@@ -49,10 +51,11 @@ class Rectangle(DrawableObject):
         pygame.draw.rect(context, self.color, rectangle_rect, self.width)
 
 
+# Derived class - representiung a text object
 class Text(DrawableObject):
     def __init__(self, content, surface, color, x, y, w, h):
         super().__init__(x, y, w, h)
-        self.object_name = "Tex"
+        self.object_name = "Text"
         self.color = color
         self.contents = content
         self.surface = surface
@@ -63,3 +66,29 @@ class Text(DrawableObject):
         text_position.center = (self.x, self.y)  # Centered on the screen
         context.blit(self.surface, text_position)
 
+
+# Derived class - representing an image object
+class Image(DrawableObject):
+    def __init__(self, url, scale, x, y):
+        super().__init__(x, y, None, None)
+        self.object_name = "Image"
+        self.url = url
+        self.scale = scale
+
+    # NOTE: image must be inside the assets folder
+    def draw(self, context: pygame.display):
+        image = pygame.image.load("assets/" + self.url)
+
+        # Resize image
+        w = image.get_width()
+        h = image.get_height()
+        new_size = (w * self.scale, h * self.scale)
+        image = pygame.transform.scale(image, new_size)
+
+        # Place image in center of specified coordinates
+        image_rect = image.get_rect()
+        image_rect.center = (self.x, self.y)
+
+        # Draw image
+        context.blit(image, image_rect)
+        

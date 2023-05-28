@@ -7,10 +7,10 @@ BLUE: color = (0, 0, 255)
 
 def setup() -> None:
     screen(800, 600)
-    backdrop(255, 255, 255)
+    backdrop((255, 255, 255))
 
 
 def draw() -> None:
-    ellipse(RED, 400, 300, 100, 200)
-    rect(GREEN, 400, 300, 100, 100)
-    text("Hell yeah!", BLUE, 400, 100)
+    image('jorcademy.png', 400, 260, 0.4)
+    text("Think diffewent, UwU", (0, 0, 0), 400, 400)
+    pass 

@@ -3,53 +3,57 @@ from primitives import *
 from typing import Tuple
 
 # Game settings
-screen_size = (100, 100)
-screen_title = "JorCademy Engine"
-background_color = (0, 0, 0)
-draw_buffer = []
+screen_size: tuple = (100, 100)
+screen_title: str = "JorCademy Engine (name not final)"
+background_color: tuple = (0, 0, 0)
+draw_buffer: list = []
 
 # Create type aliases
 color = Tuple[int, int, int]
 
 
 # Change screen size
-def screen(width: int, height: int) -> (int, int):
+def screen(width: int, height: int) -> None:
     global screen_size
     screen_size = (width, height)
 
 
 # Change screen title
-def title(t: str):
+def title(t: str) -> None:
     global screen_title
     screen_title = t
 
 
 # Change screen background color
-def backdrop(r: int, g: int, b: int):
+def backdrop(c: color) -> None:
     global background_color
-    background_color = (r, g, b)
+    background_color = c
 
 
 # Draw a circle
-def ellipse(c: (int, int, int), x: float, y: float, w: float, h: float):
+def ellipse(c: color, x: float, y: float, w: float, h: float) -> None:
     e = Ellipse(c, x, y, w, h)
     draw_buffer.append(e)
 
 
 # Draw a rectangle
-def rect(c: (int, int, int), x: float, y: float, w: float, h: float):
+def rect(c: color, x: float, y: float, w: float, h: float) -> None:
     r = Rectangle(c, x, y, w, h)
     draw_buffer.append(r)
 
 
 # Draw a string of text
-def text(content: str, c: (int, int, int), x: float, y: float):
+def text(content: str, c: color, x: float, y: float) -> None:
     font = pygame.font.Font(None, 48)
     text_surface = font.render(content, True, c)
     t = Text(content, text_surface, c, x, y, None, None)
     draw_buffer.append(t)
 
 
+# Draw an image
+def image(url: str, x: float, y: float, scale: float) -> None:
+    i = Image(url, scale, x, y)
+    draw_buffer.append(i)
 
 
 
