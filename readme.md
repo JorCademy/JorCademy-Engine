@@ -117,4 +117,4 @@ As this template is used for educational purposes, we are planning to keep it up
 ---
 
 ## Contact
-If you have any questions or remarks, feel free to reach out: nickjordan200@gmail.com
+If you have any questions or remarks, feel free to reach out: nickjordan2002@gmail.com
