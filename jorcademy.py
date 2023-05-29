@@ -11,6 +11,23 @@ draw_buffer: list = []
 # Create type aliases
 color = Tuple[int, int, int]
 
+# ==== Keyboard input ====
+
+# WASD keys
+key_w_down: bool = False 
+key_a_down: bool = False 
+key_s_down: bool = False 
+key_d_down: bool = False 
+
+# Arrow keys
+key_up_down: bool = False 
+key_down_down: bool = False 
+key_left_down: bool = False
+key_right_down: bool = False 
+
+# Other keys
+key_space_down: bool = False
+
 
 # Change screen size
 def screen(width: int, height: int) -> None:
@@ -55,6 +72,3 @@ def text(content: str, c: color, x: float, y: float) -> None:
 def image(url: str, x: float, y: float, scale: float) -> None:
     i = Image(url, scale, x, y)
     draw_buffer.append(i)
-
-
-

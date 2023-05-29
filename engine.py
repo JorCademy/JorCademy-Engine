@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import *
 import game
 import jorcademy as jc
 
@@ -16,15 +17,82 @@ pygame_icon = pygame.image.load('assets/jc_icon.png')
 pygame.display.set_icon(pygame_icon)
 
 
-def render_objects_on_screen():
+# Render objects in draw buffer
+def render_objects_on_screen() -> None:
     for obj in jc.draw_buffer:
         obj.draw(screen)
 
 
+# === Keyboard input ===
+
+def handle_special_keys_down(event: pygame.event) -> None:
+    if event.key == K_SPACE:
+        game.key_space_down = True
+
+def handle_special_keys_up(event: pygame.event) -> None:
+    if event.key == K_SPACE:
+        game.key_space_down = True
+
+def handle_arrow_keys_down(event: pygame.event) -> None:
+    if event.key == K_LEFT:
+        game.key_left_down = True
+    elif event.key == K_RIGHT:
+        game.key_right_down = True
+    elif event.key == K_DOWN:
+        game.key_down_down = True 
+    elif event.key == K_UP:
+        game.key_up_down = True 
+
+def handle_arrow_keys_up(event: pygame.event) -> None:
+    if event.key == K_LEFT:
+        game.key_left_down = False
+    elif event.key == K_RIGHT:
+        game.key_right_down = False
+    elif event.key == K_DOWN:
+        game.key_down_down = False 
+    elif event.key == K_UP:
+        game.key_up_down = False 
+
+def handle_wasd_keys_down(event: pygame.event) -> None:
+    if event.key == K_w:
+        game.key_w_down = True
+    elif event.key == K_a:
+        game.key_a_down = True
+    elif event.key == K_s:
+        game.key_s_down = True 
+    elif event.key == K_d:
+        game.key_d_down = True
+
+def handle_wasd_keys_up(event: pygame.event) -> None:
+    if event.key == K_w:
+        game.key_w_down = False
+    elif event.key == K_a:
+        game.key_a_down = False
+    elif event.key == K_s:
+        game.key_s_down = False 
+    elif event.key == K_d:
+        game.key_d_down = False
+
+
+# Game loop
 while running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
+
+        # Keyboard - DOWN
+        if event.type == KEYDOWN:
+            handle_special_keys_up(event)
+            handle_wasd_keys_down(event) 
+            handle_arrow_keys_down(event)
+
+        # Keyboard - UP
+        if event.type == KEYUP:
+            handle_special_keys_up(event)
+            handle_wasd_keys_up(event)
+            handle_arrow_keys_up(event) 
+
+        # Quit game
         if event.type == pygame.QUIT:
             running = False
 
