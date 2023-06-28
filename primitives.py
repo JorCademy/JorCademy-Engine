@@ -1,5 +1,6 @@
 import pygame
 
+
 # Super class - representing objects that can be drawn on the screen
 class DrawableObject:
     def __init__(self, x, y, w, h):
@@ -51,7 +52,7 @@ class Rectangle(DrawableObject):
         pygame.draw.rect(context, self.color, rectangle_rect, self.width)
 
 
-# Derived class - representiung a text object
+# Derived class - representing a text object
 class Text(DrawableObject):
     def __init__(self, content, surface, color, x, y, w, h):
         super().__init__(x, y, w, h)
@@ -91,4 +92,10 @@ class Image(DrawableObject):
 
         # Draw image
         context.blit(image, image_rect)
-        
+
+
+# Representing an audio object
+class Audio:
+    def __init__(self, path):
+        self.filepath = path
+

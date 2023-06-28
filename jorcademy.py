@@ -8,6 +8,9 @@ screen_title: str = "JorCademy Engine (name not final)"
 background_color: tuple = (0, 0, 0)
 draw_buffer: list = []
 
+# Initialize audio component
+pygame.mixer.init()
+
 # Create type aliases
 color = Tuple[int, int, int]
 
@@ -72,3 +75,19 @@ def text(content: str, c: color, x: float, y: float) -> None:
 def image(url: str, x: float, y: float, scale: float) -> None:
     i = Image(url, scale, x, y)
     draw_buffer.append(i)
+
+
+# Load new sound
+def load_sound(path: str):
+    sound: Audio = Audio(path)
+    return pygame.mixer.Sound(sound.filepath)
+
+
+# Play audio
+def play_sound(sound: pygame.mixer.Sound):
+    sound.play()
+
+
+# Wait for new action
+def sleep(msec: int):
+    pygame.time.wait(msec)

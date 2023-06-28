@@ -23,54 +23,70 @@ def render_objects_on_screen() -> None:
         obj.draw(screen)
 
 
-# === Keyboard input ===
+# === Audio === #
 
-def handle_special_keys_down(event: pygame.event) -> None:
-    if event.key == K_SPACE:
+# Play all sounds in audio buffer
+def handle_audio():
+    for track in jc.audio_buffer:
+        sound = pygame.mixer.Sound(track)
+        sound.play()
+
+    jc.audio_buffer.clear()
+
+
+# === Keyboard input === #
+
+def handle_special_keys_down(game_event: pygame.event) -> None:
+    if game_event.key == K_SPACE:
         game.key_space_down = True
 
-def handle_special_keys_up(event: pygame.event) -> None:
-    if event.key == K_SPACE:
-        game.key_space_down = True
 
-def handle_arrow_keys_down(event: pygame.event) -> None:
-    if event.key == K_LEFT:
+def handle_special_keys_up(game_event: pygame.event) -> None:
+    if game_event.key == K_SPACE:
+        game.key_space_down = False
+
+
+def handle_arrow_keys_down(game_event: pygame.event) -> None:
+    if game_event.key == K_LEFT:
         game.key_left_down = True
-    elif event.key == K_RIGHT:
+    elif game_event.key == K_RIGHT:
         game.key_right_down = True
-    elif event.key == K_DOWN:
+    elif game_event.key == K_DOWN:
         game.key_down_down = True 
-    elif event.key == K_UP:
+    elif game_event.key == K_UP:
         game.key_up_down = True 
 
-def handle_arrow_keys_up(event: pygame.event) -> None:
-    if event.key == K_LEFT:
+
+def handle_arrow_keys_up(game_event: pygame.event) -> None:
+    if game_event.key == K_LEFT:
         game.key_left_down = False
-    elif event.key == K_RIGHT:
+    elif game_event.key == K_RIGHT:
         game.key_right_down = False
-    elif event.key == K_DOWN:
+    elif game_event.key == K_DOWN:
         game.key_down_down = False 
-    elif event.key == K_UP:
+    elif game_event.key == K_UP:
         game.key_up_down = False 
 
-def handle_wasd_keys_down(event: pygame.event) -> None:
-    if event.key == K_w:
+
+def handle_wasd_keys_down(game_event: pygame.event) -> None:
+    if game_event.key == K_w:
         game.key_w_down = True
-    elif event.key == K_a:
+    elif game_event.key == K_a:
         game.key_a_down = True
-    elif event.key == K_s:
+    elif game_event.key == K_s:
         game.key_s_down = True 
-    elif event.key == K_d:
+    elif game_event.key == K_d:
         game.key_d_down = True
 
-def handle_wasd_keys_up(event: pygame.event) -> None:
-    if event.key == K_w:
+
+def handle_wasd_keys_up(game_event: pygame.event) -> None:
+    if game_event.key == K_w:
         game.key_w_down = False
-    elif event.key == K_a:
+    elif game_event.key == K_a:
         game.key_a_down = False
-    elif event.key == K_s:
+    elif game_event.key == K_s:
         game.key_s_down = False 
-    elif event.key == K_d:
+    elif game_event.key == K_d:
         game.key_d_down = False
 
 
@@ -82,7 +98,7 @@ while running:
 
         # Keyboard - DOWN
         if event.type == KEYDOWN:
-            handle_special_keys_up(event)
+            handle_special_keys_down(event)
             handle_wasd_keys_down(event) 
             handle_arrow_keys_down(event)
 
@@ -103,6 +119,9 @@ while running:
     # Render game
     game.draw()
     render_objects_on_screen()
+
+    # Handle audio
+    handle_audio()
 
     # flip() the display to put your work on screen
     pygame.display.flip()

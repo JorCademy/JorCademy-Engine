@@ -7,4 +7,3 @@ def setup() -> None:
 
 def draw() -> None:
     pass
-
