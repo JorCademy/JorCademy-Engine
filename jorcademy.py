@@ -4,7 +4,7 @@ from typing import Tuple
 
 # Game settings
 screen_size: tuple = (100, 100)
-screen_title: str = "JorCademy Engine (name not final)"
+screen_title: str = "JorCademy Engine"
 background_color: tuple = (0, 0, 0)
 draw_buffer: list = []
 

@@ -1,6 +1,5 @@
 from jorcademy import *
 
-
 def setup() -> None:
     pass
 
