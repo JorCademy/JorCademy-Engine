@@ -23,17 +23,6 @@ def render_objects_on_screen() -> None:
         obj.draw(screen)
 
 
-# === Audio === #
-
-# Play all sounds in audio buffer
-def handle_audio():
-    for track in jc.audio_buffer:
-        sound = pygame.mixer.Sound(track)
-        sound.play()
-
-    jc.audio_buffer.clear()
-
-
 # === Keyboard input === #
 
 def handle_special_keys_down(game_event: pygame.event) -> None:
@@ -119,9 +108,6 @@ while running:
     # Render game
     game.draw()
     render_objects_on_screen()
-
-    # Handle audio
-    handle_audio()
 
     # flip() the display to put your work on screen
     pygame.display.flip()
