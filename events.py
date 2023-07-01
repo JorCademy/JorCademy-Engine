@@ -13,7 +13,7 @@ def handle_input(game_event: pygame.event):
         key = chr(game_event.key)
     else:
         key = key_to_str(game_event.key)
-
+    print(f"received {key} event")
     if game_event.type == KEYDOWN:
         __notify_key_down(key)
     elif game_event.type == KEYUP:
@@ -22,8 +22,18 @@ def handle_input(game_event: pygame.event):
 
 
 def key_to_str(key: int) -> str:
-    if key is 32:
+    if key == 32:
         return "space"
+    elif key == 1073742050:
+        return "alt"
+    elif key == 1073742048:
+        return "ctrl"
+    elif key == 1073742049:
+        return "shift"
+    elif key == 1073741881:
+        return "caps"
+    elif key == 9:
+        return "tab"
     #TODO
     return "other"
 
