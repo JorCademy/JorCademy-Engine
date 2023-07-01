@@ -1,6 +1,6 @@
 import pygame
 import events
-from events import add_key_down_event, add_key_up_event
+from events import add_key_down_event, add_key_up_event, remove_key_up_event, remove_key_down_event
 #import engine
 from primitives import *
 from typing import Tuple

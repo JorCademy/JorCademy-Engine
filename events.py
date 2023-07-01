@@ -40,17 +40,25 @@ def key_to_str(key: int) -> str:
 
 def add_key_down_event(key: str, function):
     if key in __calls_down_event:
-        __calls_down_event[key] += function
+        __calls_down_event[key].append(function)
     else:
         __calls_down_event[key] = [function]
 
 
 def add_key_up_event(key: str, function):
     if key in __calls_up_event:
-        __calls_up_event[key] += function
+        __calls_up_event[key].append(function)
     else:
         __calls_up_event[key] = [function]
-        
+
+
+def remove_key_down_event(key: str, function):
+    __calls_down_event[key].remove(function)
+
+
+def remove_key_up_event(key: str, function):
+    __calls_up_event[key].remove(function)
+
 
 def __notify_key_down(key: str):
     if key not in __calls_down_event:
