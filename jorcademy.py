@@ -1,4 +1,6 @@
 import pygame
+import events
+#import engine
 from primitives import *
 from typing import Tuple
 
@@ -30,6 +32,10 @@ key_right_down: bool = False
 
 # Other keys
 key_space_down: bool = False
+
+
+def _event_handle_input(game_event: pygame.event):
+    events.handle_input(game_event)
 
 
 # Change screen size
