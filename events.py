@@ -38,14 +38,14 @@ def key_to_str(key: int) -> str:
     return "other"
 
 
-def key_down_event(key: str, function):
+def add_key_down_event(key: str, function):
     if key in __calls_down_event:
         __calls_down_event[key] += function
     else:
         __calls_down_event[key] = [function]
 
 
-def key_up_event(key: str, function):
+def add_key_up_event(key: str, function):
     if key in __calls_up_event:
         __calls_up_event[key] += function
     else:
