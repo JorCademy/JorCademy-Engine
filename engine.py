@@ -3,6 +3,10 @@ from pygame.locals import *
 import game
 import jorcademy as jc
 
+# Set app icon
+pygame_icon = pygame.image.load('assets/jc_icon.png')
+pygame.display.set_icon(pygame_icon)
+
 # Init user setup
 game.setup()
 
@@ -11,10 +15,6 @@ pygame.init()
 screen = pygame.display.set_mode(jc.screen_size)
 clock = pygame.time.Clock()
 running = True
-
-# Set app icon
-pygame_icon = pygame.image.load('assets/jc_icon.png')
-pygame.display.set_icon(pygame_icon)
 
 
 # Render objects in draw buffer

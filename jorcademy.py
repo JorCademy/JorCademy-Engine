@@ -44,6 +44,12 @@ def title(t: str) -> None:
     screen_title = t
 
 
+# Change app icon
+def icon(name: str) -> None:
+    app_icon = pygame.image.load("assets/" + name)
+    pygame.display.set_icon(app_icon)
+
+
 # Change screen background color
 def backdrop(c: color) -> None:
     global background_color
