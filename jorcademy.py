@@ -94,7 +94,7 @@ def load_sound(path: str):
 
 # Play audio
 def play_sound(audio_obj: Audio):
-    sound = pygame.mixer.Sound(audio_obj.filepath)
+    sound = pygame.mixer.Sound("assets/" + audio_obj.filepath)
     if not pygame.mixer.Channel(audio_obj.channel).get_busy():
         pygame.mixer.Channel(audio_obj.channel).play(sound)
 
