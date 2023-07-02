@@ -15,22 +15,32 @@ pygame.mixer.init()
 # Create type aliases
 color = Tuple[int, int, int]
 
+
 # ==== Keyboard input ====
 
 # WASD keys
-key_w_down: bool = False 
-key_a_down: bool = False 
-key_s_down: bool = False 
-key_d_down: bool = False 
+key_w_down: bool = False
+key_a_down: bool = False
+key_s_down: bool = False
+key_d_down: bool = False
 
 # Arrow keys
-key_up_down: bool = False 
-key_down_down: bool = False 
+key_up_down: bool = False
+key_down_down: bool = False
 key_left_down: bool = False
-key_right_down: bool = False 
+key_right_down: bool = False
 
 # Other keys
 key_space_down: bool = False
+
+
+# ==== Mouse input ====
+
+mouse_left_down: bool = False
+mouse_right_down: bool = False
+scroll_up: bool = False
+scroll_down: bool = False
+mouse_position: (int, int) = (0, 0)
 
 
 # Change screen size
