@@ -2,7 +2,6 @@ from jorcademy import *
 
 
 def setup() -> None:
-    print("test")
     pass
 
 
