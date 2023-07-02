@@ -80,10 +80,13 @@ class Text(DrawableObject):
         self.surface = surface
 
     def draw(self, context: pygame.display):
-        # Set the position of the text
-        text_position = self.surface.get_rect()
-        text_position.center = (self.x, self.y)  # Centered on the screen
-        context.blit(self.surface, text_position)
+        # Rotate surface
+        self.surface = pygame.transform.rotate(self.surface, self.rotation)
+        rect = self.surface.get_rect()
+        rect.center = (self.x, self.y)
+
+        # Draw surface
+        context.blit(self.surface, rect)
 
 
 # Derived class - representing an image object
