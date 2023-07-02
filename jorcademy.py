@@ -52,28 +52,28 @@ def backdrop(c: color) -> None:
 
 
 # Draw a circle
-def ellipse(c: color, x: float, y: float, w: float, h: float) -> None:
-    e = Ellipse(c, x, y, w, h)
+def ellipse(c: color, x: float, y: float, w: float, h: float, rotation=0) -> None:
+    e = Ellipse(c, x, y, w, h, rotation)
     draw_buffer.append(e)
 
 
 # Draw a rectangle
-def rect(c: color, x: float, y: float, w: float, h: float) -> None:
-    r = Rectangle(c, x, y, w, h)
+def rect(c: color, x: float, y: float, w: float, h: float, rotation=0) -> None:
+    r = Rectangle(c, x, y, w, h, rotation)
     draw_buffer.append(r)
 
 
 # Draw a string of text
-def text(content: str, c: color, x: float, y: float) -> None:
+def text(content: str, c: color, x: float, y: float, rotation=0) -> None:
     font = pygame.font.Font(None, 48)
     text_surface = font.render(content, True, c)
-    t = Text(content, text_surface, c, x, y, None, None)
+    t = Text(content, text_surface, c, x, y, None, None, rotation)
     draw_buffer.append(t)
 
 
 # Draw an image
-def image(url: str, x: float, y: float, scale: float) -> None:
-    i = Image(url, scale, x, y)
+def image(url: str, x: float, y: float, scale: float, rotation=0) -> None:
+    i = Image(url, scale, x, y, rotation)
     draw_buffer.append(i)
 
 
