@@ -57,7 +57,7 @@ def title(t: str) -> None:
 
 # Change app icon
 def icon(name: str) -> None:
-    app_icon = pygame.image.load("assets/" + name)
+    app_icon = pygame.image.load("./assets/" + name)
     pygame.display.set_icon(app_icon)
 
 
@@ -104,7 +104,7 @@ def load_sound(path: str):
 
 # Play audio
 def play_sound(audio_obj: Audio):
-    sound = pygame.mixer.Sound("assets/" + audio_obj.filepath)
+    sound = pygame.mixer.Sound("./assets/" + audio_obj.filepath)
     if not pygame.mixer.Channel(audio_obj.channel).get_busy():
         pygame.mixer.Channel(audio_obj.channel).play(sound)
 

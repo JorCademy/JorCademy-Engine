@@ -4,7 +4,7 @@ import game
 import jorcademy as jc
 
 # Set app icon
-pygame_icon = pygame.image.load('assets/jc_icon.png')
+pygame_icon = pygame.image.load('./assets/icons/jc_icon.png')
 pygame.display.set_icon(pygame_icon)
 
 # Init user setup
@@ -20,7 +20,7 @@ running = True
 # Render objects in draw buffer
 def render_objects_on_screen() -> None:
     for obj in jc.draw_buffer:
-        obj.draw(screen)
+        obj.update(screen)
 
 
 # === Keyboard input === #
@@ -142,7 +142,7 @@ while running:
     screen.fill(jc.background_color)
 
     # Render game
-    game.draw()
+    game.update()
     render_objects_on_screen()
 
     # flip() the display to put your work on screen
