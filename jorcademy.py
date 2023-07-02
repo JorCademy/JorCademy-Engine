@@ -90,8 +90,9 @@ def load_sound(path: str):
 
 
 # Play audio
-def play_sound(sound: pygame.mixer.Sound):
-    sound.play()
+def play_sound(sound: pygame.mixer.Sound, channel: int):
+    if not pygame.mixer.Channel(channel).get_busy():
+        pygame.mixer.Channel(channel).play(sound)
 
 
 # Wait for new action
