@@ -20,7 +20,7 @@ running = True
 # Render objects in draw buffer
 def render_objects_on_screen() -> None:
     for obj in jc.draw_buffer:
-        obj.update(screen)
+        obj.draw(screen)
 
 
 # === Keyboard input === #
