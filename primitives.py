@@ -120,5 +120,6 @@ class Image(DrawableObject):
 
 # Representing an audio object
 class Audio:
-    def __init__(self, path):
+    def __init__(self, channel: int, path: str):
         self.filepath = path
+        self.channel = channel

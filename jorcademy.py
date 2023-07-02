@@ -7,6 +7,7 @@ screen_size: tuple = (100, 100)
 screen_title: str = "JorCademy Engine"
 background_color: tuple = (0, 0, 0)
 draw_buffer: list = []
+audio_channel_count: int = 0
 
 # Initialize audio component
 pygame.mixer.init()
@@ -85,14 +86,17 @@ def image(url: str, x: float, y: float, scale: float, rotation=0) -> None:
 
 # Load new sound
 def load_sound(path: str):
-    sound: Audio = Audio(path)
+    global audio_channel_count
+    sound: Audio = Audio(audio_channel_count, path)
+    audio_channel_count += 1
     return pygame.mixer.Sound(sound.filepath)
 
 
 # Play audio
-def play_sound(sound: pygame.mixer.Sound, channel: int):
-    if not pygame.mixer.Channel(channel).get_busy():
-        pygame.mixer.Channel(channel).play(sound)
+def play_sound(audio_obj: Audio):
+    sound = pygame.mixer.Sound(audio_obj.filepath)
+    if not pygame.mixer.Channel(audio_obj.channel).get_busy():
+        pygame.mixer.Channel(audio_obj.channel).play(sound)
 
 
 # Wait for new action
