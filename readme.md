@@ -119,5 +119,15 @@ As this template is used for educational purposes, we are planning to keep it up
 
 ---
 
+## Credits
+This template provides a number of assets for the developer to use. To express our gratitude for the creators of these assets, we provide links to the used sources below:
+- OpenGameArt: https://opengameart.org
+- Kenney: www.kenney.nl
+- Gostay: https://opengameart.org/content/lotus-flowers
+- Dotown: https://dotown.maeda-design-room.net
+- GDJ: https://openclipart.org/detail/331285/rainbow-peace-sign
+
+---
+
 ## Contact
 If you have any questions or remarks, feel free to reach out: nickjordan2002@gmail.com
