@@ -81,7 +81,7 @@ def rect(c: color, x: float, y: float, w: float, h: float, rotation=0) -> None:
 
 
 # Draw a string of text
-def text(content: str, size: int, c: color, x: float, y: float, font="Nunito") -> None:
+def text(content: str, size: int, c: color, x: float, y: float, font="Nunito", rotation=0) -> None:
     # Fetch font
     try:
         font = pygame.font.Font("./assets/" + font, size)
@@ -90,7 +90,7 @@ def text(content: str, size: int, c: color, x: float, y: float, font="Nunito") -
 
     # Draw font
     text_surface = font.render(content, True, c)
-    t = Text(content, text_surface, c, x, y, None, None, size, font)
+    t = Text(content, text_surface, c, x, y, None, None, size, font, rotation)
     draw_buffer.append(t)
 
 

@@ -72,8 +72,8 @@ class Rectangle(DrawableObject):
 
 # Derived class - representing a text object
 class Text(DrawableObject):
-    def __init__(self, content, surface, color, x, y, w, h, size, font):
-        super().__init__(x, y, w, h)
+    def __init__(self, content, surface, color, x, y, w, h, size, font, rotation):
+        super().__init__(x, y, w, h, rotation)
         self.object_name = "Text"
         self.color = color
         self.contents = content
@@ -83,6 +83,7 @@ class Text(DrawableObject):
 
     def draw(self, context: pygame.display):
         # Set the position of the text
+        self.surface = pygame.transform.rotate(self.surface, self.rotation)
         text_position = self.surface.get_rect()
         text_position.center = (self.x, self.y)  # Centered on the screen
         context.blit(self.surface, text_position)
