@@ -9,6 +9,7 @@
       "**/venv": true,
       "**/readme.md": true,
       "**/__pycache__": true,
+      "**/events.py": true
     }
   }
   
