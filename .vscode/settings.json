@@ -1,0 +1,14 @@
+{
+    "files.exclude": {
+      // "**/engine.py": true,
+      // "**/jorcademy.py": true,
+      // "**/primitives.py": true,
+      "**/Pipfile": true,
+      "**/Pipfile.lock": true,
+      "**/.idea": true,
+      "**/venv": true,
+      "**/readme.md": true,
+      "**/__pycache__": true,
+    }
+  }
+  
