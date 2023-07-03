@@ -27,12 +27,15 @@ This file contains helper functions the developer can use to build their game in
 The JorCademy module provides the following building blocks at the moment (we suppose that the functionalities of these functions are clear):
 - ```screen(width: int, height: int) -> None```
 - ```title(t: str) -> None```
+- ```icon(name: str) -> None```
 - ```backdrop(c: color) -> None```
-- ```ellipse(c: color, x: float, y: float, w: float, h: float) -> None```
-- ```rect(c: color, x: float, y: float, w: float, h: float) -> None```
-- ```text(content: str, c: color, x: float, y: float) -> None```
-- ```image(url: str, x: float, y: float, scale: float) -> None```
-
+- ```ellipse(c: color, x: float, y: float, w: float, h: float, rotation=0) -> None```
+- ```rect(c: color, x: float, y: float, w: float, h: float, rotation=0) -> None```
+- ```text(content: str, c: color, x: float, y: float, font="Nunito") -> None```
+- ```image(url: str, x: float, y: float, scale: float, rotation=0) -> None```
+- ```load_sound(path: str) -> Audio```
+- ```play_sound(audio_obj: Audio) -> None```
+- ```sleep(msec: int) -> None```
 
 
 ### <i>primitives.py</i>
