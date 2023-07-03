@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 import game
 import jorcademy as jc
+import events
 
 # Set app icon
 pygame_icon = pygame.image.load('./assets/icons/jc_icon.png')
@@ -26,72 +27,17 @@ def render_objects_on_screen() -> None:
 # === Keyboard input === #
 
 def handle_keyboard_events(event_args: pygame.event):
-    jc._event_handle_input(event_args)
-    # Keyboard - DOWN
+    events.handle_input(event_args)
+
+    if not (event_args.type == KEYDOWN or event_args.type == KEYUP):
+        return
+    key = events.key_to_str(event_args.key)
     if event_args.type == KEYDOWN:
-        handle_special_keys_down(event_args)
-        handle_wasd_keys_down(event_args)
-        handle_arrow_keys_down(event_args)
-
-    # Keyboard - UP
-    if event_args.type == KEYUP:
-        handle_special_keys_up(event_args)
-        handle_wasd_keys_up(event_args)
-        handle_arrow_keys_up(event_args)
+        jc.key_status[key] = True
+    elif event_args.type == KEYUP:
+        jc.key_status[key] = False
 
 
-def handle_special_keys_down(game_event: pygame.event) -> None:
-    if game_event.key == K_SPACE:
-        game.key_space_down = True
-
-
-def handle_special_keys_up(game_event: pygame.event) -> None:
-    if game_event.key == K_SPACE:
-        game.key_space_down = False
-
-
-def handle_arrow_keys_down(game_event: pygame.event) -> None:
-    if game_event.key == K_LEFT:
-        game.key_left_down = True
-    elif game_event.key == K_RIGHT:
-        game.key_right_down = True
-    elif game_event.key == K_DOWN:
-        game.key_down_down = True
-    elif game_event.key == K_UP:
-        game.key_up_down = True
-
-
-def handle_arrow_keys_up(game_event: pygame.event) -> None:
-    if game_event.key == K_LEFT:
-        game.key_left_down = False
-    elif game_event.key == K_RIGHT:
-        game.key_right_down = False
-    elif game_event.key == K_DOWN:
-        game.key_down_down = False
-    elif game_event.key == K_UP:
-        game.key_up_down = False
-
-
-def handle_wasd_keys_down(game_event: pygame.event) -> None:
-    if game_event.key == K_w:
-        game.key_w_down = True
-    elif game_event.key == K_a:
-        game.key_a_down = True
-    elif game_event.key == K_s:
-        game.key_s_down = True
-    elif game_event.key == K_d:
-        game.key_d_down = True
-
-
-def handle_wasd_keys_up(game_event: pygame.event) -> None:
-    if game_event.key == K_w:
-        game.key_w_down = False
-    elif game_event.key == K_a:
-        game.key_a_down = False
-    elif game_event.key == K_s:
-        game.key_s_down = False 
-    elif game_event.key == K_d:
-        game.key_d_down = False
 
 
 # ==== Mouse input ==== #

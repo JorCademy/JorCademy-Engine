@@ -1,5 +1,4 @@
 import pygame
-import events
 from events import add_key_down_event, add_key_up_event, remove_key_up_event, remove_key_down_event
 #import engine
 from primitives import *
@@ -21,24 +20,14 @@ color = Tuple[int, int, int]
 
 # ==== Keyboard input ====
 
-# WASD keys
-key_w_down: bool = False
-key_a_down: bool = False
-key_s_down: bool = False
-key_d_down: bool = False
+key_status = {}
 
-# Arrow keys
-key_up_down: bool = False
-key_down_down: bool = False
-key_left_down: bool = False
-key_right_down: bool = False
+def is_key_down(key: str) -> bool:
+    if key in key_status:
+        return key_status[key]
+    else:
+        return False
 
-# Other keys
-key_space_down: bool = False
-
-
-def _event_handle_input(game_event: pygame.event):
-    events.handle_input(game_event)
 
 
 # ==== Mouse input ====
