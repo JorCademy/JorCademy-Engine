@@ -26,6 +26,7 @@ def render_objects_on_screen() -> None:
 # === Keyboard input === #
 
 def handle_keyboard_events(event_args: pygame.event):
+    jc._event_handle_input(event_args)
     # Keyboard - DOWN
     if event_args.type == KEYDOWN:
         handle_special_keys_down(event_args)
@@ -88,7 +89,7 @@ def handle_wasd_keys_up(game_event: pygame.event) -> None:
     elif game_event.key == K_a:
         game.key_a_down = False
     elif game_event.key == K_s:
-        game.key_s_down = False
+        game.key_s_down = False 
     elif game_event.key == K_d:
         game.key_d_down = False
 

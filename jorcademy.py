@@ -1,4 +1,7 @@
 import pygame
+import events
+from events import add_key_down_event, add_key_up_event, remove_key_up_event, remove_key_down_event
+#import engine
 from primitives import *
 from typing import Tuple
 
@@ -32,6 +35,10 @@ key_right_down: bool = False
 
 # Other keys
 key_space_down: bool = False
+
+
+def _event_handle_input(game_event: pygame.event):
+    events.handle_input(game_event)
 
 
 # ==== Mouse input ====
@@ -86,7 +93,7 @@ def text(content: str, size: int, c: color, x: float, y: float, font="Nunito", r
     try:
         font = pygame.font.Font("./assets/" + font, size)
     except:
-        font = pygame.font.SysFont(font, size)    
+        font = pygame.font.SysFont(font, size)
 
     # Draw font
     text_surface = font.render(content, True, c)
