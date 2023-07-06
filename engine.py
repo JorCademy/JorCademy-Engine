@@ -4,6 +4,8 @@ import game
 import jorcademy as jc
 import events
 
+__debug = True
+
 # Set app icon
 pygame_icon = pygame.image.load('./assets/icons/jc_icon.png')
 pygame.display.set_icon(pygame_icon)
@@ -18,6 +20,12 @@ clock = pygame.time.Clock()
 running = True
 
 
+# Print debug message when in debug mode 
+def __debug_log(msg: str):
+    if __debug:
+        print(msg)
+
+
 # Render objects in draw buffer
 def render_objects_on_screen() -> None:
     for obj in jc.draw_buffer:
@@ -27,7 +35,7 @@ def render_objects_on_screen() -> None:
 # === Keyboard input === #
 
 def handle_keyboard_events(event_args: pygame.event):
-    events.handle_input(event_args)
+    events.handle_keyboard_input(event_args)
 
     if not (event_args.type == KEYDOWN or event_args.type == KEYUP):
         return
@@ -38,47 +46,49 @@ def handle_keyboard_events(event_args: pygame.event):
         jc.key_status[key] = False
 
 
-
-
 # ==== Mouse input ==== #
 
-def handle_mouse_input(event_args: pygame.event):
-    # Mouse - DOWN
-    if event_args.type == MOUSEBUTTONDOWN:
-        if event_args.button == 1:
-            game.mouse_left_down = True
-        elif event_args.button == 2:
-            game.mouse_right_down = True
+def handle_mouse_events(event_args: pygame.event):
+    events.handle_mouse_input(event_args)
 
-    # Mouse - UP
-    if event_args.type == MOUSEBUTTONUP:
-        if event_args.button == 1:
-            game.mouse_left_down = False
-        elif event_args.button == 2:
-            game.mouse_right_down = False
-
-    # Mouse - WHEEL
+    # Wheel event
     if event_args.type == MOUSEWHEEL:
+        __debug_log("Wheel")
         if event_args.y > 0:
-            game.scroll_up = True
+            jc.__scroll_up = True
         elif event_args.y < 0:
-            game.scroll_down = True
+            jc.__scroll_down = True
 
-    # Mouse - MOTION
+    # Motion event
     if event_args.type == MOUSEMOTION:
-        game.mouse_position = event_args.pos
+        __debug_log("Movement")
+        jc.mouse_position = event_args.pos
+
+    # Stop execution when no mouse event detected
+    if not (event_args.type == MOUSEBUTTONDOWN 
+            or event_args.type == MOUSEBUTTONUP):
+        return 
+
+    # Fetch pressed button (if possible)
+    button = events.button_to_str(event_args.button)
+    if (event_args.type == MOUSEBUTTONDOWN 
+        or event_args.type == MOUSEBUTTONUP):
+        __debug_log(f"Received {button} event")
+
+    # Button event
+    if event_args.type == MOUSEBUTTONDOWN:
+        jc.mouse_status[button] = True 
+    elif event_args.type == MOUSEBUTTONUP:
+        jc.mouse_status[button] = False
 
 
 # Game loop
 while running:
-    game.scroll_down = False
-    game.scroll_up = False
-
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
         handle_keyboard_events(event)
-        handle_mouse_input(event)
+        handle_mouse_events(event)
 
         # Quit game
         if event.type == pygame.QUIT:
@@ -97,5 +107,6 @@ while running:
     jc.draw_buffer.clear()
 
     clock.tick(60)  # limits FPS to 60
+
 
 pygame.quit()

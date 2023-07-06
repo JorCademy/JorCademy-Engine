@@ -1,8 +1,8 @@
 import pygame
-from events import add_key_down_event, add_key_up_event, remove_key_up_event, remove_key_down_event
-#import engine
 from primitives import *
 from typing import Tuple
+import events
+
 
 # Game settings
 screen_size: tuple = (100, 100)
@@ -22,6 +22,7 @@ color = Tuple[int, int, int]
 
 key_status = {}
 
+# Get whether a specific key is down
 def is_key_down(key: str) -> bool:
     if key in key_status:
         return key_status[key]
@@ -29,14 +30,30 @@ def is_key_down(key: str) -> bool:
         return False
 
 
-
 # ==== Mouse input ====
 
-mouse_left_down: bool = False
-mouse_right_down: bool = False
-scroll_up: bool = False
-scroll_down: bool = False
+mouse_status = {}
+__scroll_up: bool = False
+__scroll_down: bool = False
 mouse_position: (int, int) = (0, 0)
+
+
+# Get whether a specific mouse button is down
+def is_mouse_button_down(button: str) -> bool:
+    if button in mouse_status:
+        return mouse_status[button]
+    else:
+        return False 
+
+
+# Get whether the player is scrolling up
+def is_scrolling_up() -> bool:
+    return __scroll_up
+
+
+# Get whether the player is scrolling down
+def is_scrolling_down() -> bool:
+    return __scroll_down
 
 
 # Change screen size
