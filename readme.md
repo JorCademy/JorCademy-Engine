@@ -25,6 +25,10 @@ This file is used to setup the PyGame renderer and to render all the drawable ob
 This file contains helper functions the developer can use to build their game in <i>game.py</i>. This file mainly contains functions which can be used to draw shapes and change the properties of the game screen. Besides, this module contains the ```draw_buffer```, which contains all objects that need to be drawn onto the screen by the engine. 
 <br>
 The JorCademy module provides the following building blocks at the moment (we suppose that the functionalities of these functions are clear):
+- ```is_key_down(key: str) -> bool```
+- ```is_mouse_button_down(button: str) -> bool```
+- ```is_scrolling_up() -> bool```
+- ```is_scrolling_down() -> bool```
 - ```screen(width: int, height: int) -> None```
 - ```title(t: str) -> None```
 - ```icon(name: str) -> None```
