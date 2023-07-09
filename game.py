@@ -14,9 +14,9 @@ def handle_user_input():
     if is_key_down("w"):
         circle_y -= 1
     if is_key_down("s"):
-        circle_x += 1
-    if is_key_down("d"):
         circle_y += 1
+    if is_key_down("d"):
+        circle_x += 1
     if is_key_down("a"):
         circle_x -= 1
 
@@ -40,7 +40,7 @@ def update() -> None:
     backdrop((255, 255, 255))
     # Draw the circle
     ellipse(circle_color,
-        circle_y,
         circle_x,
+        circle_y,
         circle_width,
         circle_width)
