@@ -1,6 +1,6 @@
 {
     "files.exclude": {
-      "**/engine.py": true,
+      "**/main.py": true,
       "**/jorcademy.py": true,
       "**/primitives.py": true,
       "**/Pipfile": true,
