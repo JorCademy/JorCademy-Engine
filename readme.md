@@ -2,13 +2,13 @@
 
 This template is built for courses on programming, created for JorCademy. It will therefore mainly be used for educational purposes.  
 
----
 
 ## Contents
 This section is used to quickly browse through the documentation.
 - [Files](#files)
 - [Dependencies](#dependencies)
 - [Practical information](#practical-information)
+- [Convert project to WebAssembly](#convert-project-to-webassembly)
 - [Maintenance](#maintenance)
 
 ---
@@ -49,7 +49,6 @@ This file contains classes for objects which can be drawn onto the screen. To be
 ### <i>game.py</i>
 This file is meant to contain the gameplay code of the game. It is the file the gameplay developer will work with. The other files are not relevant to the gameplay developer. 
 
----
 
 
 ## Dependencies
@@ -57,8 +56,11 @@ The template is supported by PyGame, a library used to create games with. In thi
 ```
 pip install pygame
 ```
+Besides the template uses pygbag, which is used to convert the PyGame project to WebAssembly. Pygbag can be installed using the following terminal command:
+```
+pip install pygbag
+```
 
----
 
 ## Practical information
 This section contains some instructions on how to use this template properly, as well as a number of examples. 
@@ -111,17 +113,27 @@ def draw() -> None:
     y += 5
 
     # Drawing backdrop
-    backdrop((0, 0, 0)))
+    backdrop((0, 0, 0))
 
     # Drawing the circle 
     ellipse(circle_color, x, y, w, h)
 ```
----
+
+## Convert project to WebAssembly
+If you've created a project, you may want to share it with friends and family. Fortunately, the JorCademy Engine makes this easy. You can convert the project to WebAssembly with the following terminal command:
+
+```
+pygbag --ume_block 0 main.py
+```
+
+If the conversion goes well, you can test the project while running the above command in the browser at the following address: http://localhost:8000/
+
+In addition, a folder named *build* is created after the conversion. This folder contains two more folders: *web* and *web-cache*. If the version in the browser is satisfactory, and you want to upload the project to itch.io, you can convert the web folder to a .zip folder and upload this folder when creating a new itch.io project.
+
 
 ## Maintenance
 As this template is used for educational purposes, we are planning to keep it up-to-date for the upcoming Python versions. However, it deserves to mention that JorCademy is, as it stands, a non-profit organization. Therefore, updates might take some time to be released. 
 
----
 
 ## Credits
 This template provides a number of assets for the developer to use. To express our gratitude for the creators of these assets, we provide links to the used sources below:
@@ -131,7 +143,6 @@ This template provides a number of assets for the developer to use. To express o
 - Dotown: https://dotown.maeda-design-room.net
 - GDJ: https://openclipart.org/detail/331285/rainbow-peace-sign
 
----
 
 ## Contact
 If you have any questions or remarks, feel free to reach out: nickjordan2002@gmail.com
