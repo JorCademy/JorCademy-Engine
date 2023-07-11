@@ -1,6 +1,7 @@
 {
     "files.exclude": {
       "**/main.py": true,
+      "**/.gitignore": true,
       "**/jorcademy.py": true,
       "**/primitives.py": true,
       "**/Pipfile": true,
