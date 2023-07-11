@@ -8,7 +8,7 @@ import asyncio
 __debug = False
 
 # Set app icon
-pygame_icon = pygame.image.load('./assets/icons/jc_icon.png')
+pygame_icon = pygame.image.load('assets/icons/jc_icon.png')
 pygame.display.set_icon(pygame_icon)
 
 # Init user setup
@@ -49,7 +49,7 @@ def __handle_keyboard_events(event_args: pygame.event):
 
 # ==== Mouse input ==== #
 
-async def __handle_mouse_events(event_args: pygame.event):
+def __handle_mouse_events(event_args: pygame.event):
     events.handle_mouse_input(event_args)
 
     # Wheel event
@@ -66,14 +66,12 @@ async def __handle_mouse_events(event_args: pygame.event):
         jc.mouse_position = event_args.pos
 
     # Stop execution when no mouse event detected
-    if not (event_args.type == MOUSEBUTTONDOWN
-            or event_args.type == MOUSEBUTTONUP):
+    if not (event_args.type == MOUSEBUTTONDOWN or event_args.type == MOUSEBUTTONUP):
         return
 
-        # Fetch pressed button (if possible)
+    # Fetch pressed button (if possible)
     button = events.button_to_str(event_args.button)
-    if (event_args.type == MOUSEBUTTONDOWN
-            or event_args.type == MOUSEBUTTONUP):
+    if event_args.type == MOUSEBUTTONDOWN or event_args.type == MOUSEBUTTONUP:
         __debug_log(f"Received {button} event")
 
     # Button event
@@ -88,7 +86,7 @@ async def main():
     global running
 
     # Game loop
-    while True:
+    while running:
         # poll for events
         # pygame.QUIT event means the user clicked X to close your window
         for event in pygame.event.get():
@@ -112,12 +110,10 @@ async def main():
         jc.__draw_buffer.clear()
 
         clock.tick(60)  # limits FPS to 60
-
         await asyncio.sleep(0)
 
-        if not running:
-            pygame.quit()
-            return
+    pygame.quit()
+    return
 
 
 asyncio.run(main())
