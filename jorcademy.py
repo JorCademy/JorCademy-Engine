@@ -1,5 +1,10 @@
 from primitives import *
 from typing import Tuple
+from events import (handle_mouse_input, add_mouse_button_down_event, 
+    add_mouse_button_up_event, remove_mouse_button_down_event, 
+    remove_mouse_button_up_event, add_key_down_event, add_key_up_event,
+    remove_key_down_event, remove_key_up_event)
+
 
 # Game settings
 screen_size: tuple = (100, 100)
