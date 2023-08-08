@@ -36,7 +36,7 @@ The JorCademy module provides the following building blocks at the moment (we su
 - ```ellipse(c: color, x: float, y: float, w: float, h: float, rotation=0) -> None```
 - ```rect(c: color, x: float, y: float, w: float, h: float, rotation=0) -> None```
 - ```text(content: str, c: color, x: float, y: float, font="Nunito") -> None```
-- ```image(url: str, x: float, y: float, scale: float, rotation=0) -> None```
+- ```image(url: str, x: float, y: float, scale: float, flipped=False, rotation=0) -> None```
 - ```load_sound(path: str) -> Audio```
 - ```play_sound(audio_obj: Audio) -> None```
 - ```sleep(msec: int) -> None```
