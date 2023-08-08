@@ -1,5 +1,6 @@
 import pygame
 
+
 # Super class - representing objects that can be drawn on the screen
 class DrawableObject:
     def __init__(self, x, y, w, h, rotation=0):
@@ -17,13 +18,13 @@ class DrawableObject:
         pygame.draw.circle(context, self.x, self.y, 100)
 
     def rotate(self, image, angle, pivot):
-        pos = (self.x,self.y)
+        pos = (self.x, self.y)
         originPos = pivot
 
         # offset from pivot to center
-        image_rect = image.get_rect(topleft = (pos[0] - originPos[0], pos[1]-originPos[1]))
+        image_rect = image.get_rect(topleft=(pos[0] - originPos[0], pos[1] - originPos[1]))
         offset_center_to_pivot = pygame.math.Vector2(pos) - image_rect.center
-        
+
         # roatated offset from pivot to center
         rotated_offset = offset_center_to_pivot.rotate(-angle)
 
@@ -32,14 +33,12 @@ class DrawableObject:
 
         # get a rotated image
         rotated_image = pygame.transform.rotate(image, angle)
-        rotated_image_rect = rotated_image.get_rect(center = rotated_image_center)
+        rotated_image_rect = rotated_image.get_rect(center=rotated_image_center)
 
-        return (rotated_image, rotated_image_rect)
-
-
+        return rotated_image, rotated_image_rect
 
 
-# Derived class - representing an ellipse object 
+# Derived class - representing an ellipse object
 class Ellipse(DrawableObject):
     def __init__(self, color, x, y, w, h, rotation=0):
         super().__init__(x, y, w, h, rotation)
@@ -60,7 +59,7 @@ class Ellipse(DrawableObject):
         pygame.draw.ellipse(shape_surf, self.color, (0, 0, *target_rect.size), self.width)
 
         # Rotate circle
-        rotated_surf,rotated_rect = self.rotate(shape_surf, self.rotation, (self.width/2,self.height/2))
+        rotated_surf, rotated_rect = self.rotate(shape_surf, self.rotation, (self.width / 2, self.height / 2))
 
         # Draw circle
         context.blit(rotated_surf, rotated_rect)
@@ -83,7 +82,7 @@ class Rectangle(DrawableObject):
         image = surface.copy()
 
         # Rotate surface
-        image,rect= self.rotate(image, self.rotation, (self.width/2,self.height/2))
+        image, rect = self.rotate(image, self.rotation, (self.width / 2, self.height / 2))
         rect.center = (self.x, self.y)
 
         # Draw surface
@@ -103,15 +102,16 @@ class Text(DrawableObject):
 
     def draw(self, context: pygame.display):
         # Set the position of the text
-        self.surface, text_position = self.rotate(self.surface, self.rotation, (self.width/2,self.height/2))
+        self.surface, text_position = self.rotate(self.surface, self.rotation, (self.width / 2, self.height / 2))
         text_position.center = (self.x, self.y)  # Centered on the screen
         context.blit(self.surface, text_position)
 
 
 # Derived class - representing an image object
 class Image(DrawableObject):
-    def __init__(self, url, scale, x, y, rotation=0):
+    def __init__(self, url, scale, x, y, flipped=False, rotation=0):
         super().__init__(x, y, None, None, rotation)
+        self.flipped = flipped
         self.object_name = "Image"
         self.url = url
         self.scale = scale
@@ -130,8 +130,12 @@ class Image(DrawableObject):
         image_rect = image.get_rect()
         image_rect.center = (self.x, self.y)
 
+        # If needed, flip image
+        if self.flipped:
+            image = pygame.transform.flip(image, True, False)
+
         # Rotate image
-        image, image_rect = self.rotate(image, self.rotation, (new_size[0]/2, new_size[1]/2))
+        image = pygame.transform.rotate(image, self.rotation)
 
         # Draw image
         context.blit(image, image_rect)

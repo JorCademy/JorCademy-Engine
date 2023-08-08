@@ -110,8 +110,8 @@ def text(content: str, size: int, c: color, x: float, y: float, font="Nunito", r
 
 
 # Draw an image
-def image(url: str, x: float, y: float, scale: float, rotation=0) -> None:
-    i = Image(url, scale, x, y, rotation)
+def image(url: str, x: float, y: float, scale: float, flipped=False, rotation=0) -> None:
+    i = Image(url, scale, x, y, flipped, rotation)
     __draw_buffer.append(i)
 
 
