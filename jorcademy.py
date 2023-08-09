@@ -1,10 +1,5 @@
-from primitives import *
 from typing import Tuple
-from events import (handle_mouse_input, add_mouse_button_down_event, 
-    add_mouse_button_up_event, remove_mouse_button_down_event, 
-    remove_mouse_button_up_event, add_key_down_event, add_key_up_event,
-    remove_key_down_event, remove_key_up_event)
-
+from primitives import *
 
 # Game settings
 screen_size: tuple = (100, 100)
@@ -117,17 +112,12 @@ def image(url: str, x: float, y: float, scale: float, flipped=False, rotation=0)
 
 # Load new sound
 def load_sound(path: str):
-    global audio_channel_count
-    sound: Audio = Audio(audio_channel_count, path)
-    audio_channel_count += 1
-    return pygame.mixer.Sound(sound.filepath)
-
-
-# Play audio
-def play_sound(audio_obj: Audio):
-    sound = pygame.mixer.Sound("./assets/" + audio_obj.filepath)
-    if not pygame.mixer.Channel(audio_obj.channel).get_busy():
-        pygame.mixer.Channel(audio_obj.channel).play(sound)
+    sound = Exception
+    try:
+        sound = pygame.mixer.Sound(path)
+    except:
+        print("Error: Audio could not be loaded.")
+    return sound
 
 
 # Wait for new action

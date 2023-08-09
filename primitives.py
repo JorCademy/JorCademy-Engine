@@ -25,10 +25,10 @@ class DrawableObject:
         image_rect = image.get_rect(topleft=(pos[0] - originPos[0], pos[1] - originPos[1]))
         offset_center_to_pivot = pygame.math.Vector2(pos) - image_rect.center
 
-        # roatated offset from pivot to center
+        # rotated offset from pivot to center
         rotated_offset = offset_center_to_pivot.rotate(-angle)
 
-        # roatetd image center
+        # rotated image center
         rotated_image_center = (pos[0] - rotated_offset.x, pos[1] - rotated_offset.y)
 
         # get a rotated image
@@ -135,14 +135,8 @@ class Image(DrawableObject):
             image = pygame.transform.flip(image, True, False)
 
         # Rotate image
-        image = pygame.transform.rotate(image, self.rotation)
+        image, image_rect = self.rotate(image, self.rotation, (new_size[0]/2, new_size[1]/2))
 
         # Draw image
         context.blit(image, image_rect)
 
-
-# Representing an audio object
-class Audio:
-    def __init__(self, channel: int, path: str):
-        self.filepath = path
-        self.channel = channel
