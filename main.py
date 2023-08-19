@@ -1,27 +1,38 @@
+import asyncio
+import os
+
 import pygame
 from pygame.locals import *
+
+import events
 import game
 import jorcademy as jc
-import events
-import asyncio
 
 __debug = False
 
 # Set app icon
-pygame_icon = pygame.image.load('assets/icons/jc_icon.png')
+icon_path = os.path.join("assets", "icons", "jc_icon.png")
+pygame_icon = pygame.image.load(icon_path)
 pygame.display.set_icon(pygame_icon)
+flags = pygame.DOUBLEBUF | pygame.HWSURFACE
 
 # Init user setup
 game.setup()
 
 # pygame setup
+pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
-screen = pygame.display.set_mode(jc.screen_size)
+screen = pygame.display.set_mode(jc.screen_size, flags, 16)
+
+# Setup game loop
 clock = pygame.time.Clock()
-running = True
+running = 1
+
+# Set amount of audio channels
+pygame.mixer.set_num_channels(32)
 
 
-# Print debug message when in debug mode 
+# Print debug message when in debug mode
 def __debug_log(msg: str):
     if __debug:
         print(msg)
@@ -95,11 +106,14 @@ async def main():
 
             # Quit game
             if event.type == pygame.QUIT:
-                running = False
+                running = 0
 
         # fill the screen with a color to wipe away anything from last frame
         pygame.display.set_caption(jc.screen_title)
         screen.fill(jc.background_color)
+
+        # Update mouse position
+        jc.mouse_position = pygame.mouse.get_pos()
 
         # Render game
         game.update()
@@ -108,8 +122,6 @@ async def main():
         # flip() the display to put your work on screen
         pygame.display.flip()
         jc.__draw_buffer.clear()
-
-        clock.tick(60)  # limits FPS to 60
         await asyncio.sleep(0)
 
     pygame.quit()

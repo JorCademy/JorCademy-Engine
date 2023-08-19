@@ -7,6 +7,7 @@ screen_title: str = "JorCademy Engine"
 background_color: tuple = (0, 0, 0)
 __draw_buffer: list = []
 audio_channel_count: int = 0
+screen = pygame.display.set_mode((100, 100))
 
 # Initialize audio component
 pygame.mixer.init()
@@ -104,9 +105,18 @@ def text(content: str, size: int, c: color, x: float, y: float, font="Nunito", r
     __draw_buffer.append(t)
 
 
+# Load an image
+def load_image(path: str) -> pygame.Surface:
+    full_path = "assets/" + path
+    try:
+        return pygame.image.load(full_path).convert_alpha()
+    except pygame.error as e:
+        print(f"Error loading image {full_path}: {e}")
+
+
 # Draw an image
-def image(url: str, x: float, y: float, scale: float, flipped=False, rotation=0) -> None:
-    i = Image(url, scale, x, y, flipped, rotation)
+def image(surface: pygame.Surface, x: float, y: float, scale: float, flipped=False, rotation=0) -> None:
+    i = Image(surface, scale, x, y, flipped, rotation)
     __draw_buffer.append(i)
 
 

@@ -109,22 +109,20 @@ class Text(DrawableObject):
 
 # Derived class - representing an image object
 class Image(DrawableObject):
-    def __init__(self, url, scale, x, y, flipped=False, rotation=0):
+    def __init__(self, image, scale, x, y, flipped=False, rotation=0):
         super().__init__(x, y, None, None, rotation)
         self.flipped = flipped
         self.object_name = "Image"
-        self.url = url
+        self.image = image
         self.scale = scale
 
     # NOTE: image must be inside the assets folder
     def draw(self, context: pygame.display):
-        image = pygame.image.load("assets/" + self.url)
-
         # Resize image
-        w = image.get_width()
-        h = image.get_height()
+        w = self.image.get_width()
+        h = self.image.get_height()
         new_size = (w * self.scale, h * self.scale)
-        image = pygame.transform.scale(image, new_size)
+        image = pygame.transform.scale(self.image, new_size)
 
         # Place image in center of specified coordinates
         image_rect = image.get_rect()
