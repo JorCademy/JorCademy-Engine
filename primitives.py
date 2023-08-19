@@ -109,7 +109,7 @@ class Text(DrawableObject):
 
 # Derived class - representing an image object
 class Image(DrawableObject):
-    def __init__(self, image, scale, x, y, flipped=False, rotation=0):
+    def __init__(self, image, scale=1, x=0, y=0, flipped=False, rotation=0):
         super().__init__(x, y, None, None, rotation)
         self.flipped = flipped
         self.object_name = "Image"
