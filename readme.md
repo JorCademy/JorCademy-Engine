@@ -8,7 +8,7 @@ This project is built upon the [JorCademy Engine](https://github.com/JorCademy/J
 ## Getting Started
 
 1. Download the project from GitHub or fork it and clone to your local machine.
-2. Refer to the [wiki](https://github.com/nickname2002/MonoZenith/wiki) for comprehensive documentation and usage instructions.
+2. TODO: Refer to the [wiki](https://github.com/nickname2002/MonoZenith/wiki) for comprehensive documentation and usage instructions.
 
 ## Features
 
