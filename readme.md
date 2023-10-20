@@ -3,7 +3,7 @@
 **SlitherZenith** is a lightweight PyGame wrapper designed to streamline game development using Python. It simplifies game development by providing abstractions and helper methods, allowing developers to focus on creating engaging gameplay experiences.
 This project is built upon the [JorCademy Engine](https://github.com/JorCademy/JorCademy-Engine).
 
-<img src="https://github.com/nickname2002/MonoZenith/blob/main/MonoZenith/bin/Debug/net6.0/Content/Textures/MONOZENITH.png?raw=true" width="600" />
+<img src="https://github.com/nickname2002/SlitherZenith/blob/main/assets/sprites/slitherzenith_banner.png" width="600" />
 
 ## Getting Started
 
