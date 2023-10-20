@@ -91,6 +91,16 @@ def screen(width: int, height: int) -> None:
     screen_size = (width, height)
 
 
+# Get screen width
+def get_screen_width() -> int:
+    return screen_size[0]
+
+
+# Get screen height
+def get_screen_height() -> int:
+    return screen_size[1]
+
+
 # Change screen title
 def title(t: str) -> None:
     global screen_title
@@ -152,7 +162,7 @@ def image(surface: pygame.Surface, x: float, y: float, scale: float, flipped=Fal
 
 
 # Load new sound
-def load_sound(path: str):
+def load_sound(path: str) -> pygame.mixer.Sound:
     sound = Exception
     try:
         sound = pygame.mixer.Sound(path)
@@ -162,7 +172,7 @@ def load_sound(path: str):
 
 
 # Play audio
-def play_sound(sound, p_volume=1.0):
+def play_sound(sound, p_volume=1.0) -> None:
     try:
         sound.set_volume(p_volume * settings.volume)
         if sound.get_num_channels() == 0:
@@ -172,5 +182,5 @@ def play_sound(sound, p_volume=1.0):
 
 
 # Wait for new action
-def sleep(msec: int):
+def sleep(msec: int) -> None:
     pygame.time.wait(msec)
