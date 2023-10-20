@@ -13,6 +13,7 @@ import slitherzenith as sz
 from Components.Support.settings import fps, base_dir
 from Components.Support import settings
 import Components.Support.input as inp
+from Components.Timer.timermanager import update_timers
 
 __debug = False
 
@@ -162,6 +163,7 @@ async def main():
         game.update()
         game.draw()
         __render_objects_on_screen()
+        update_timers()
 
         # Update input timer
         if not inp.clickable:

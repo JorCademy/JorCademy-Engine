@@ -1,4 +1,6 @@
 from slitherzenith import *
+from Components.Support.settings import *
+from Components.Timer.timermanager import *
 
 
 def setup() -> None:
