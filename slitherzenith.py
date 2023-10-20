@@ -4,8 +4,8 @@ from primitives import *
 
 # Game settings
 screen_size: tuple = (400, 400)
-screen_title: str = "JorCademy Engine"
-background_color: tuple = (0, 0, 0)
+screen_title: str = "SlitherZenith"
+background_color: tuple = (255, 255, 255)
 __draw_buffer: list = []
 
 # Initialize audio component
