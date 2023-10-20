@@ -1,8 +1,9 @@
-from jorcademy import *
+from slitherzenith import *
+from Components.UI.button import Button
 
 
 def setup() -> None:
-    pass
+    backdrop((255, 255, 255))
 
 
 def update() -> None:

@@ -1,28 +1,37 @@
+# Python
 import asyncio
 import os
 
+# Pygame
 import pygame
 from pygame.locals import *
 
+# Game
 import events
 import game
-import jorcademy as jc
+import slitherzenith as sz
+from Components.Support.settings import fps, base_dir
+from Components.Support import settings
 
 __debug = False
 
 # Set app icon
-icon_path = os.path.join("assets", "icons", "jc_icon.png")
+icon_path = os.path.join(base_dir, "../assets", "icons", "slitherzenith_black.png")
 pygame_icon = pygame.image.load(icon_path)
 pygame.display.set_icon(pygame_icon)
-flags = pygame.DOUBLEBUF | pygame.HWSURFACE
 
 # Init user setup
 game.setup()
 
 # pygame setup
+flags = pygame.DOUBLEBUF | pygame.HWSURFACE
 pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
-screen = pygame.display.set_mode(jc.screen_size, flags, 16)
+screen = pygame.display.set_mode(sz.screen_size, flags, 16)
+pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP])
+
+# Controller
+joysticks = {}
 
 # Setup game loop
 clock = pygame.time.Clock()
@@ -40,7 +49,7 @@ def __debug_log(msg: str):
 
 # Render objects in draw buffer
 def __render_objects_on_screen() -> None:
-    for obj in jc.__draw_buffer:
+    for obj in sz.__draw_buffer:
         obj.draw(screen)
 
 
@@ -53,9 +62,9 @@ def __handle_keyboard_events(event_args: pygame.event):
         return
     key = events.key_to_str(event_args.key)
     if event_args.type == KEYDOWN:
-        jc.__key_status[key] = True
+        sz.__key_status[key] = True
     elif event_args.type == KEYUP:
-        jc.__key_status[key] = False
+        sz.__key_status[key] = False
 
 
 # ==== Mouse input ==== #
@@ -67,14 +76,14 @@ def __handle_mouse_events(event_args: pygame.event):
     if event_args.type == MOUSEWHEEL:
         __debug_log("Wheel")
         if event_args.y > 0:
-            jc.__scroll_up = True
+            sz.__scroll_up = True
         elif event_args.y < 0:
-            jc.__scroll_down = True
+            sz.__scroll_down = True
 
     # Motion event
     if event_args.type == MOUSEMOTION:
         __debug_log("Movement")
-        jc.mouse_position = event_args.pos
+        sz.mouse_position = event_args.pos
 
     # Stop execution when no mouse event detected
     if not (event_args.type == MOUSEBUTTONDOWN or event_args.type == MOUSEBUTTONUP):
@@ -87,9 +96,25 @@ def __handle_mouse_events(event_args: pygame.event):
 
     # Button event
     if event_args.type == MOUSEBUTTONDOWN:
-        jc.__mouse_status[button] = True
+        sz.__mouse_status[button] = True
     elif event_args.type == MOUSEBUTTONUP:
-        jc.__mouse_status[button] = False
+        sz.__mouse_status[button] = False
+
+
+# === Controller input === #
+
+def __handle_controller_events(event_args: pygame.event):
+    responsive_buttons = [0, 1, 2, 3, 11, 12, 13, 14]
+
+    # Button down event
+    if event_args.type == pygame.JOYBUTTONDOWN:
+        if event_args.button in responsive_buttons:
+            sz.__nintendo_switch_button_status[event_args.button] = True
+
+    # Button up event
+    elif event_args.type == pygame.JOYBUTTONUP:
+        if event_args.button in responsive_buttons:
+            sz.__nintendo_switch_button_status[event_args.button] = False
 
 
 # Application entry point
@@ -103,17 +128,34 @@ async def main():
         for event in pygame.event.get():
             __handle_keyboard_events(event)
             __handle_mouse_events(event)
+            __handle_controller_events(event)
+
+            # Handle hotplugging
+            if event.type == pygame.JOYDEVICEADDED:
+                # This event will be generated when the program starts for every
+                # joystick, filling up the list without needing to create them manually.
+                joy = pygame.joystick.Joystick(event.device_index)
+                sz.__nintendo_switch_joystick[joy.get_instance_id()] = joy
+                print(f"Joystick {joy.get_instance_id()} connencted")
+
+            if event.type == pygame.JOYDEVICEREMOVED:
+                del joysticks[event.instance_id]
+                print(f"Joystick {event.instance_id} disconnected")
 
             # Quit game
             if event.type == pygame.QUIT:
                 running = 0
 
         # fill the screen with a color to wipe away anything from last frame
-        pygame.display.set_caption(jc.screen_title)
-        screen.fill(jc.background_color)
+        pygame.display.set_caption(sz.screen_title)
+        screen.fill(sz.background_color)
 
         # Update mouse position
-        jc.mouse_position = pygame.mouse.get_pos()
+        sz.mouse_position = pygame.mouse.get_pos()
+
+        # Get elapsed time between frames
+        delta_time = clock.tick(fps) / 1000.0
+        settings.delta_time = delta_time
 
         # Render game
         game.update()
@@ -121,7 +163,7 @@ async def main():
 
         # flip() the display to put your work on screen
         pygame.display.flip()
-        jc.__draw_buffer.clear()
+        sz.__draw_buffer.clear()
         await asyncio.sleep(0)
 
     pygame.quit()
