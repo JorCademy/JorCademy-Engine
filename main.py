@@ -157,8 +157,9 @@ async def main():
         delta_time = clock.tick(fps) / 1000.0
         settings.delta_time = delta_time
 
-        # Render game
+        # Update & render game
         game.update()
+        game.draw()
         __render_objects_on_screen()
 
         # flip() the display to put your work on screen

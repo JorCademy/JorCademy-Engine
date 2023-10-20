@@ -10,3 +10,7 @@ def setup() -> None:
 
 def update() -> None:
     pass
+
+
+def draw() -> None:
+    pass
