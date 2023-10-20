@@ -142,7 +142,7 @@ def text(content: str, size: int, c: color, x: float, y: float, font="Nunito", r
 
     # Draw font
     text_surface = font.render(content, True, c)
-    t = Text(content, text_surface, c, x, y, None, None, size, font, rotation)
+    t = Text(content, text_surface, c, x, y, text_surface.get_width(), text_surface.get_height(), size, font, rotation)
     __draw_buffer.append(t)
 
 

@@ -1,7 +1,4 @@
 from slitherzenith import *
-from Components.UI.button import Button
-from Components.GameObject.GameObject import GameObject
-from Components.GameObject.Collision.Collider import Collider
 
 
 def setup() -> None:
@@ -14,3 +11,4 @@ def update() -> None:
 
 def draw() -> None:
     pass
+

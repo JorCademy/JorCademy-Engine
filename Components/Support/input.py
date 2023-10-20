@@ -12,7 +12,7 @@ SWITCH_D_DOWN = 12
 SWITCH_D_LEFT = 13
 SWITCH_D_RIGHT = 14
 
-click_delay = 10
+click_delay = 0.5
 click_timer = 0
 clickable = True
 

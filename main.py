@@ -12,6 +12,7 @@ import game
 import slitherzenith as sz
 from Components.Support.settings import fps, base_dir
 from Components.Support import settings
+import Components.Support.input as inp
 
 __debug = False
 
@@ -20,15 +21,15 @@ icon_path = os.path.join(base_dir, "../assets", "icons", "slitherzenith_black.pn
 pygame_icon = pygame.image.load(icon_path)
 pygame.display.set_icon(pygame_icon)
 
-# Init user setup
-game.setup()
-
 # pygame setup
 flags = pygame.DOUBLEBUF | pygame.HWSURFACE
 pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
 screen = pygame.display.set_mode(sz.screen_size, flags, 16)
 pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP])
+
+# Setup game
+game.setup()
 
 # Controller
 joysticks = {}
@@ -161,6 +162,13 @@ async def main():
         game.update()
         game.draw()
         __render_objects_on_screen()
+
+        # Update input timer
+        if not inp.clickable:
+            inp.click_timer += delta_time
+            if inp.click_timer >= inp.click_delay:
+                inp.clickable = True
+                inp.click_timer = 0
 
         # flip() the display to put your work on screen
         pygame.display.flip()
