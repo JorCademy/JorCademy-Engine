@@ -1,11 +1,12 @@
 from Components.Support.support import *
+from Components.TileMap.tile import Tile
 
 
-def read_tile_map(csv_filename: str, tile_set_filename: str):
+def read_tile_map(csv_filename: str, tile_set_filename: str) -> [Tile]:
     level_data = import_level_data(csv_filename)
     level_length = len(level_data[0] * tile_size)
-    tile_set = import_tileset(tile_set_filename)
-    self.environment = []
+    tile_set = import_tile_set(tile_set_filename)
+    environment = []
 
     # Initial y-coordinate of tile
     y = tile_size / 2
@@ -23,10 +24,12 @@ def read_tile_map(csv_filename: str, tile_set_filename: str):
             tile_object = Tile(tile_image, x, y)
 
             # Add tile to environment
-            self.environment.append(tile_object)
+            environment.append(tile_object)
 
             # Increment x-coordinate
             x += tile_size
 
         # Increment y-coordinate
         y += tile_size
+
+    return environment

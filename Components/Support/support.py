@@ -1,7 +1,7 @@
 import csv
 import os
 import pygame
-from Support.settings import tile_size, scale, base_dir
+from Components.Support.settings import tile_size, scale, base_dir
 
 
 # Convert selected level csv-file to list of lists, containing the tiles
