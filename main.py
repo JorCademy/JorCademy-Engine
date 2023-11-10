@@ -22,15 +22,15 @@ icon_path = os.path.join(base_dir, "../assets", "icons", "slitherzenith_black.pn
 pygame_icon = pygame.image.load(icon_path)
 pygame.display.set_icon(pygame_icon)
 
+# Setup game
+game.setup()
+
 # pygame setup
 flags = pygame.DOUBLEBUF | pygame.HWSURFACE
 pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
 screen = pygame.display.set_mode(sz.screen_size, flags, 16)
 pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP])
-
-# Setup game
-game.setup()
 
 # Controller
 joysticks = {}
