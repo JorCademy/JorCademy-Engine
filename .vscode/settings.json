@@ -3,7 +3,7 @@
       "**/.vscode": true,
       "**/main.py": true,
       "**/.gitignore": true,
-      "**/jorcademy.py": true,
+      "**/slitherzenith.py": true,
       "**/primitives.py": true,
       "**/Pipfile": true,
       "**/Pipfile.lock": true,
