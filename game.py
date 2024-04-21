@@ -1,16 +1,30 @@
 from slitherzenith import *
-from Components.Support.settings import *
-from Components.Timer.timermanager import *
+from components.support.settings import *
+from components.timer.timer_manager import *
 
 
 def setup() -> None:
+    """
+    Set up the game
+
+    :return: None
+    """
     pass
 
 
 def update() -> None:
+    """
+    Update the game
+
+    :return: None
+    """
     pass
 
 
 def draw() -> None:
-    pass
+    """
+    Draw the game
 
+    :return: None
+    """
+    pass

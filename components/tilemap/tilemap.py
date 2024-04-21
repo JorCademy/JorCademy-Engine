@@ -1,8 +1,15 @@
-from Components.Support.support import *
-from Components.TileMap.tile import Tile
+from components.support.support import *
+from components.tilemap.tile import Tile
 
 
 def read_tile_map(csv_filename: str, tile_set_filename: str) -> [Tile]:
+    """
+    Read tile map from csv file and tile set
+
+    :param csv_filename: Filename of csv file
+    :param tile_set_filename: Filename of tile set
+    :return: List of tiles
+    """
     level_data = import_level_data(csv_filename)
     level_length = len(level_data[0] * tile_size)
     tile_set = import_tile_set(tile_set_filename)

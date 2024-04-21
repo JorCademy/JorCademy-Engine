@@ -1,16 +1,20 @@
-from Components.Support.settings import scale
-from Components.Support.input import *
-import Components.Support.input as inp
+from components.support.settings import scale
+from components.support.input import *
+import components.support.input as inp
 from slitherzenith import *
 
 
 class Button:
+    """
+    A button
+    """
 
     def __init__(self, pos,
                  w, h,
                  content, content_size, content_color,
                  button_color, hover_color,
-                 border=False, border_size=5, border_color=(50, 50, 50)):
+                 border=False, border_size=5, border_color=(50, 50, 50)) \
+            -> None:
         self.x = pos[0]
         self.y = pos[1]
         self.width = w
@@ -35,29 +39,53 @@ class Button:
         self.border_size = border_size
         self.border_color = border_color
 
-    def is_hovered(self):
+    def is_hovered(self) -> bool:
+        """
+        Check if the button is hovered
+
+        :return: Whether the button is hovered
+        """
         if self.selected:
             return True
 
-        if self.x - self.width / 2 * scale <= pygame.mouse.get_pos()[0] <= self.x + self.width / 2 * scale and \
-                self.y - self.height / 2 * scale <= pygame.mouse.get_pos()[1] <= self.y + self.height / 2 * scale:
+        if (self.x - self.width / 2 * scale <=
+                pygame.mouse.get_pos()[0]
+                <= self.x + self.width / 2 * scale and
+                self.y - self.height / 2 * scale
+                <= pygame.mouse.get_pos()[1]
+                <= self.y + self.height / 2 * scale):
             return True
 
-    def clicked(self):
+    def clicked(self) -> bool:
+        """
+        Check if the button is clicked
+
+        :return: Whether the button is clicked
+        """
         if not inp.clickable:
             return False
 
         if self.is_hovered():
-            inp.clickable = not (pygame.mouse.get_pressed()[0] or is_nintendo_switch_pro_button_down(SWITCH_A))
+            inp.clickable = not (pygame.mouse.get_pressed()[0] or
+                                 is_nintendo_switch_pro_button_down(SWITCH_A))
             return pygame.mouse.get_pressed()[0] or return_key_pressed()
 
-    def update(self):
+    def update(self) -> None:
+        """
+        Update the button
+
+        :return: None
+        """
         if self.is_hovered():
             self.button_color = self.hover_color
         else:
             self.button_color = self.orig_button_color
 
-    def draw(self):
+    def draw(self) -> None:
+        """
+        Draw the button
+        :return: None
+        """
         # Draw border
         if self.border_enabled:
             rect(self.border_color,

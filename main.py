@@ -10,15 +10,17 @@ from pygame.locals import *
 import events
 import game
 import slitherzenith as sz
-from Components.Support.settings import fps, base_dir
-from Components.Support import settings
-import Components.Support.input as inp
-from Components.Timer.timermanager import update_timers
+from components.support.settings import fps, base_dir
+from components.support import settings
+import components.support.input as inp
+from components.timer.timer_manager import update_timers
 
 __debug = False
 
 # Set app icon
-icon_path = os.path.join(base_dir, "../assets", "icons", "slitherzenith_black.png")
+icon_path = os.path.join(base_dir,
+                         "../assets", "icons",
+                         "slitherzenith_black.png")
 pygame_icon = pygame.image.load(icon_path)
 pygame.display.set_icon(pygame_icon)
 
@@ -44,20 +46,37 @@ pygame.mixer.set_num_channels(32)
 
 
 # Print debug message when in debug mode
-def __debug_log(msg: str):
+def __debug_log(msg: str) -> None:
+    """
+    Print debug message when in debug mode
+
+    :param msg: The message to print
+    :return: None
+    """
     if __debug:
         print(msg)
 
 
 # Render objects in draw buffer
 def __render_objects_on_screen() -> None:
+    """
+    Render objects in draw buffer
+
+    :return: None
+    """
     for obj in sz.__draw_buffer:
         obj.draw(screen)
 
 
 # === Keyboard input === #
 
-def __handle_keyboard_events(event_args: pygame.event):
+def __handle_keyboard_events(event_args: pygame.event) -> None:
+    """
+    Handle keyboard events
+
+    :param event_args: The event arguments
+    :return: None
+    """
     events.handle_keyboard_input(event_args)
 
     if not (event_args.type == KEYDOWN or event_args.type == KEYUP):
@@ -71,7 +90,13 @@ def __handle_keyboard_events(event_args: pygame.event):
 
 # ==== Mouse input ==== #
 
-def __handle_mouse_events(event_args: pygame.event):
+def __handle_mouse_events(event_args: pygame.event) -> None:
+    """
+    Handle mouse events
+
+    :param event_args: The event arguments
+    :return: None
+    """
     events.handle_mouse_input(event_args)
 
     # Wheel event
@@ -88,7 +113,8 @@ def __handle_mouse_events(event_args: pygame.event):
         sz.mouse_position = event_args.pos
 
     # Stop execution when no mouse event detected
-    if not (event_args.type == MOUSEBUTTONDOWN or event_args.type == MOUSEBUTTONUP):
+    if not (event_args.type == MOUSEBUTTONDOWN or
+            event_args.type == MOUSEBUTTONUP):
         return
 
     # Fetch pressed button (if possible)
@@ -105,7 +131,13 @@ def __handle_mouse_events(event_args: pygame.event):
 
 # === Controller input === #
 
-def __handle_controller_events(event_args: pygame.event):
+def __handle_controller_events(event_args: pygame.event) -> None:
+    """
+    Handle controller events
+
+    :param event_args: The event arguments
+    :return: None
+    """
     responsive_buttons = [0, 1, 2, 3, 11, 12, 13, 14]
 
     # Button down event
@@ -120,7 +152,12 @@ def __handle_controller_events(event_args: pygame.event):
 
 
 # Application entry point
-async def main():
+async def main() -> None:
+    """
+    Application entry point
+
+    :return: None
+    """
     global running
 
     # Game loop
@@ -132,10 +169,11 @@ async def main():
             __handle_mouse_events(event)
             __handle_controller_events(event)
 
-            # Handle hotplugging
+            # Handle hot plugging
             if event.type == pygame.JOYDEVICEADDED:
-                # This event will be generated when the program starts for every
-                # joystick, filling up the list without needing to create them manually.
+                # This event will be generated when the program starts for
+                # every joystick, filling up the list without needing to
+                # create them manually.
                 joy = pygame.joystick.Joystick(event.device_index)
                 sz.__nintendo_switch_joystick[joy.get_instance_id()] = joy
                 print(f"Joystick {joy.get_instance_id()} connencted")

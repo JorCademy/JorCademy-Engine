@@ -17,19 +17,34 @@ click_timer = 0
 clickable = True
 
 
-def move_right_key_pressed():
+def move_right_key_pressed() -> bool:
+    """
+    Check if the right key is pressed
+
+    :return: Whether the right key is pressed
+    """
     return (is_key_down("d") or
             is_key_down('right') or
             is_nintendo_switch_pro_button_down(SWITCH_D_RIGHT))
 
 
-def move_left_key_pressed():
+def move_left_key_pressed() -> bool:
+    """
+    Check if the left key is pressed
+
+    :return: Whether the left key is pressed
+    """
     return (is_key_down("a") or
             is_key_down('left') or
             is_nintendo_switch_pro_button_down(SWITCH_D_LEFT))
 
 
-def jump_key_pressed():
+def jump_key_pressed() -> bool:
+    """
+    Check if the jump key is pressed
+
+    :return: Whether the jump key is pressed
+    """
     return (is_key_down("w") or
             is_key_down('up') or
             is_key_down('space') or
@@ -37,21 +52,41 @@ def jump_key_pressed():
             is_nintendo_switch_pro_button_down(SWITCH_B))
 
 
-def attack_key_pressed():
+def attack_key_pressed() -> bool:
+    """
+    Check if the attack key is pressed
+
+    :return: Whether the attack key is pressed
+    """
     return (is_key_down("shift") or
             is_nintendo_switch_pro_button_down(SWITCH_Y))
 
 
-def skip_key_pressed():
+def skip_key_pressed() -> bool:
+    """
+    Check if the skip key is pressed
+
+    :return: Whether the skip key is pressed
+    """
     return (is_key_down("space") or
             is_nintendo_switch_pro_button_down(SWITCH_X))
 
 
-def return_key_pressed():
+def return_key_pressed() -> bool:
+    """
+    Check if the return key is pressed
+
+    :return: Whether the return key is pressed
+    """
     return (is_key_down("return") or
             is_nintendo_switch_pro_button_down(SWITCH_A))
 
 
-def pause_key_pressed():
+def pause_key_pressed() -> bool:
+    """
+    Check if the pause key is pressed
+
+    :return: Whether the pause key is pressed
+    """
     return (is_key_down("esc") or
             is_nintendo_switch_pro_button_down(SWITCH_X))

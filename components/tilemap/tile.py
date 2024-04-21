@@ -1,8 +1,11 @@
 from slitherzenith import *
-from Components.Support.settings import *
+from components.support.settings import *
 
 
 class Tile:
+    """
+    A tile
+    """
 
     def __init__(self, surface, pos, index):
         self.surface = surface
@@ -12,5 +15,10 @@ class Tile:
         self.width = tile_size
         self.height = tile_size
 
-    def draw(self):
+    def draw(self) -> None:
+        """
+        Draw the tile
+
+        :return: None
+        """
         image(self.surface, self.x, self.y, self.width, self.height)
