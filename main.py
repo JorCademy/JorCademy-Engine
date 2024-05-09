@@ -156,18 +156,28 @@ def __show_splash_screen() -> None:
     screen.fill((255, 255, 255))
 
     # Load splash screen
-    splash_screen_path = os.path.join(base_dir, "assets", "sprites",
+    splash_screen_path = os.path.join(base_dir,
+                                      "assets",
+                                      "sprites",
                                       "slitherzenith_banner.png")
     splash_screen = pygame.image.load(splash_screen_path)
 
-    # Set initial size for the splash screen
-    initial_scale_factor = 0.3
+    # Calculate initial scale factor based on the smaller of width and height
+    screen_aspect_ratio = screen.get_width() / screen.get_height()
+    image_aspect_ratio = splash_screen.get_width() / splash_screen.get_height()
+    if screen_aspect_ratio > image_aspect_ratio:
+        initial_scale_factor = (screen.get_height() /
+                                splash_screen.get_height() * 0.5)
+    else:
+        initial_scale_factor = (screen.get_width() /
+                                splash_screen.get_width() * 0.5)
+
+    # Calculate initial width and height
     initial_width = int(splash_screen.get_width() * initial_scale_factor)
     initial_height = int(splash_screen.get_height() * initial_scale_factor)
 
     # Calculate scaling factor based on time elapsed
-    scale_factor = min((3000 - __splash_screen_timer) / 3000 * 0.6,
-                       0.6)
+    scale_factor = min((3000 - __splash_screen_timer) / 3000 * 0.6, 0.6)
 
     # Smooth scale the splash screen image
     scaled_splash_screen = pygame.transform.smoothscale(splash_screen, (
@@ -188,6 +198,7 @@ def __show_splash_screen() -> None:
     # Draw splash screen
     scaled_splash_screen.set_alpha(int(alpha * 255))
     screen.blit(scaled_splash_screen, scaled_splash_screen_rect)
+
 
 
 async def main() -> None:
@@ -227,7 +238,7 @@ async def main() -> None:
                 running = 0
 
         # Show splash screen
-        if __splash_screen_timer > 0:
+        if __splash_screen_timer > 0 and sz.get_splash_screen_enabled():
             __show_splash_screen()
             __splash_screen_timer -= clock.tick(fps)
             pygame.display.flip()

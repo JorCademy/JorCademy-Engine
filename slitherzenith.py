@@ -7,6 +7,7 @@ screen_size: tuple = (400, 400)
 screen_title: str = "SlitherZenith"
 background_color: tuple = (255, 255, 255)
 __draw_buffer: list = []
+__splash_screen_enabled: bool = True
 
 # Initialize audio component
 pygame.mixer.init()
@@ -37,7 +38,6 @@ __nintendo_switch_button_status = {
 __nintendo_switch_joystick = {}
 
 
-# Get whether a specific key is down
 def is_key_down(key: str) -> bool:
     """
     Get whether a specific key is down
@@ -319,3 +319,33 @@ def sleep(msec: int) -> None:
     :return: None
     """
     pygame.time.wait(msec)
+
+
+def set_cursor_visible(visible: bool) -> None:
+    """
+    Set the cursor to be visible
+
+    :param visible: Whether the cursor is visible
+    :return: None
+    """
+    pygame.mouse.set_visible(visible)
+
+
+def set_splash_screen_enabled(enabled: bool) -> None:
+    """
+    Set the splash screen to be enabled
+
+    :param enabled: Whether the splash screen is enabled
+    :return: None
+    """
+    global __splash_screen_enabled
+    __splash_screen_enabled = enabled
+
+
+def get_splash_screen_enabled() -> bool:
+    """
+    Get whether the splash screen is enabled
+
+    :return: Whether the splash screen is enabled
+    """
+    return __splash_screen_enabled
