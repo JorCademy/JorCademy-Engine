@@ -9,7 +9,7 @@ def setup() -> None:
 
     :return: None
     """
-    pass
+    screen(800, 600)
 
 
 def update() -> None:

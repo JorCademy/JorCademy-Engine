@@ -6,20 +6,23 @@ import os
 import pygame
 from pygame.locals import *
 
+import components.support.input as inp
 # Game
 import events
 import game
 import slitherzenith as sz
-from components.support.settings import fps, base_dir
 from components.support import settings
-import components.support.input as inp
+from components.support.settings import fps, base_dir
 from components.timer.timer_manager import update_timers
 
 __debug = False
 
+# Splash screen
+__splash_screen_timer = 3000
+
 # Set app icon
 icon_path = os.path.join(base_dir,
-                         "../assets", "icons",
+                         "assets", "icons",
                          "slitherzenith_black.png")
 pygame_icon = pygame.image.load(icon_path)
 pygame.display.set_icon(pygame_icon)
@@ -45,7 +48,6 @@ running = 1
 pygame.mixer.set_num_channels(32)
 
 
-# Print debug message when in debug mode
 def __debug_log(msg: str) -> None:
     """
     Print debug message when in debug mode
@@ -57,7 +59,6 @@ def __debug_log(msg: str) -> None:
         print(msg)
 
 
-# Render objects in draw buffer
 def __render_objects_on_screen() -> None:
     """
     Render objects in draw buffer
@@ -67,8 +68,6 @@ def __render_objects_on_screen() -> None:
     for obj in sz.__draw_buffer:
         obj.draw(screen)
 
-
-# === Keyboard input === #
 
 def __handle_keyboard_events(event_args: pygame.event) -> None:
     """
@@ -87,8 +86,6 @@ def __handle_keyboard_events(event_args: pygame.event) -> None:
     elif event_args.type == KEYUP:
         sz.__key_status[key] = False
 
-
-# ==== Mouse input ==== #
 
 def __handle_mouse_events(event_args: pygame.event) -> None:
     """
@@ -129,8 +126,6 @@ def __handle_mouse_events(event_args: pygame.event) -> None:
         sz.__mouse_status[button] = False
 
 
-# === Controller input === #
-
 def __handle_controller_events(event_args: pygame.event) -> None:
     """
     Handle controller events
@@ -151,7 +146,50 @@ def __handle_controller_events(event_args: pygame.event) -> None:
             sz.__nintendo_switch_button_status[event_args.button] = False
 
 
-# Application entry point
+def __show_splash_screen() -> None:
+    """
+    Show the splash screen with an initial size and slower resizing.
+
+    :return: None
+    """
+    # Show white backdrop color
+    screen.fill((255, 255, 255))
+
+    # Load splash screen
+    splash_screen_path = os.path.join(base_dir, "assets", "sprites",
+                                      "slitherzenith_banner.png")
+    splash_screen = pygame.image.load(splash_screen_path)
+
+    # Set initial size for the splash screen
+    initial_scale_factor = 0.3
+    initial_width = int(splash_screen.get_width() * initial_scale_factor)
+    initial_height = int(splash_screen.get_height() * initial_scale_factor)
+
+    # Calculate scaling factor based on time elapsed
+    scale_factor = min((3000 - __splash_screen_timer) / 3000 * 0.6,
+                       0.6)
+
+    # Smooth scale the splash screen image
+    scaled_splash_screen = pygame.transform.smoothscale(splash_screen, (
+        int(initial_width + initial_width * scale_factor),
+        int(initial_height + initial_height * scale_factor)))
+
+    # Calculate alpha value
+    alpha = 1
+    if __splash_screen_timer > 2000:
+        alpha = 1 - (__splash_screen_timer - 2000) / 1000
+
+    # Calculate position to center the scaled splash screen image
+    screen_center_x = screen.get_width() // 2
+    screen_center_y = screen.get_height() // 2
+    scaled_splash_screen_rect = scaled_splash_screen.get_rect(
+        center=(screen_center_x, screen_center_y))
+
+    # Draw splash screen
+    scaled_splash_screen.set_alpha(int(alpha * 255))
+    screen.blit(scaled_splash_screen, scaled_splash_screen_rect)
+
+
 async def main() -> None:
     """
     Application entry point
@@ -159,9 +197,11 @@ async def main() -> None:
     :return: None
     """
     global running
+    global __splash_screen_timer
 
     # Game loop
     while running:
+
         # poll for events
         # pygame.QUIT event means the user clicked X to close your window
         for event in pygame.event.get():
@@ -185,6 +225,13 @@ async def main() -> None:
             # Quit game
             if event.type == pygame.QUIT:
                 running = 0
+
+        # Show splash screen
+        if __splash_screen_timer > 0:
+            __show_splash_screen()
+            __splash_screen_timer -= clock.tick(fps)
+            pygame.display.flip()
+            continue
 
         # fill the screen with a color to wipe away anything from last frame
         pygame.display.set_caption(sz.screen_title)

@@ -9,13 +9,11 @@ clouds = True
 delta_time = 1 / fps
 
 # Get the current script's directory
-script_dir = os.path.abspath(os.path.dirname(__file__))
+__script_dir = os.path.abspath(os.path.dirname(__file__))
 
-# Navigate one directory up
-parent_dir = os.path.dirname(script_dir)
-
-# Get the base directory of the executable
-base_dir = getattr(sys, "_MEIPASS", parent_dir)
+# Navigate two directories up
+base_dir = os.path.abspath(
+    os.path.join(__script_dir, os.pardir, os.pardir))
 
 # Tile properties
 tile_size = int(32 * scale)
