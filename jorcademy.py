@@ -1,8 +1,9 @@
 from typing import Tuple
+
 from primitives import *
 
 # Game settings
-screen_size: tuple = (100, 100)
+screen_size: tuple = (400, 400)
 screen_title: str = "JorCademy Engine"
 background_color: tuple = (0, 0, 0)
 __draw_buffer: list = []
